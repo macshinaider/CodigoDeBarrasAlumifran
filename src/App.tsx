@@ -1,10 +1,10 @@
 import "./App.css";
-import ConsultaPrecosForm from "./pages/home";
+import Home from "./pages/home";
 
 function App() {
   return (
     <>
-      <ConsultaPrecosForm/>
+      <Home/>
     </>
   );
 }
