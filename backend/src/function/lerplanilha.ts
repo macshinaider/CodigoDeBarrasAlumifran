@@ -10,7 +10,7 @@ function readXLS(filePath: string) {
   const workbook = xlsx.readFile(filePath);
   const sheetName = workbook.SheetNames[0];
   const sheetData = xlsx.utils.sheet_to_json(workbook.Sheets[sheetName]);
-  
+
   return sheetData;
 }
 
@@ -26,6 +26,16 @@ async function migrateDataToPrisma(data: any[]) {
     const ativo = row.proatinat.toString();
 
     console.log("ativo: ", ativo);
+
+    const consultar = await prisma.alumifranPrecos.findMany({
+      where: {
+        prodes: codigo,
+      },
+    });
+
+    if (consultar) {
+      
+    }
 
     if (typeof descricao === "string") {
       await prisma.alumifranPrecos.create({
