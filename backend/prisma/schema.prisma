@@ -11,47 +11,8 @@ datasource db {
 }
 
 model AlumifranPrecos {
-  id          Int      @id @default(autoincrement())
-  procod      String
-  prodes      String
-  promar      String
-  prouni      String
-  proatinat   String
-  procp1      String
-  procp2      String
-  proref      String
-  prosit      String
-  procp3      String
-  procp4      String
-  propeso     String
-  procodipi   String
-  procest     String
-  proqmi      String
-  propdc      String
-  propdv      String
-  propcv      String
-  proicm      String
-  proipi      String
-  comissao    String
-  profin      String
-  profre      String
-  proipf      String
-  proipe      String
-  procfv      String
-  procop      String
-  procus      String
-  prorent     String
-  procapt     String
-  prodesc     String
-  proipecus   String
-  prodifimp   String
-  proemb      String
-  prodescon   String
-  prolotvd    String
-  proorig     String
-  procsosn    String
-  procofins   String
-  proadc      String
-  clf_des     String
-  clf_ncm     String
+  id      Int     @id @default(autoincrement())
+  procod  String?
+  prodes String?
+  propcv  String?
 }

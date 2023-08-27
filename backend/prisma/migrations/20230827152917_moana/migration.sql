@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "AlumifranPrecos" ALTER COLUMN "procod" SET DATA TYPE TEXT,
+ALTER COLUMN "propcv" SET DATA TYPE TEXT;
