@@ -18,26 +18,34 @@ function readXLS(filePath: string) {
 async function migrateDataToPrisma(data: any[]) {
   for (const row of data) {
     const descricao = row.prodes.toString();
-
     const codigo = row.procod.toString();
-
     const valor = row.propcv;
-
     const ativo = row.proatinat.toString();
 
     console.log("ativo: ", ativo);
 
-    const consultar = await prisma.alumifranPrecos.findMany({
+    const existingData = await prisma.alumifranPrecos.findUnique({
       where: {
-        prodes: codigo,
+        procod: codigo,
       },
     });
 
-    if (consultar) {
-      
-    }
-
-    if (typeof descricao === "string") {
+    if (existingData) {
+      // Atualizar os dados caso já existam
+      if (existingData.prodes !== descricao || existingData.propcv !== valor) {
+        await prisma.alumifranPrecos.update({
+          where: {
+            procod: codigo,
+          },
+          data: {
+            prodes: descricao,
+            propcv: valor,
+          },
+        });
+        console.log("Dados atualizados:", row);
+      }
+    } else {
+      // Cadastrar os novos dados
       await prisma.alumifranPrecos.create({
         data: {
           prodes: descricao,
@@ -47,7 +55,6 @@ async function migrateDataToPrisma(data: any[]) {
       });
 
       console.log("Inserindo dados:", row);
-    } else {
     }
   }
 }
