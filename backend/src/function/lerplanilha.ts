@@ -1,8 +1,9 @@
-import * as fs from "fs";
 import { PrismaClient } from "@prisma/client";
 import * as xlsx from "xlsx";
+import * as path from "path";
 
 const prisma = new PrismaClient();
+
 
 // Ler o arquivo XLS e extrair os dados
 function readXLS(filePath: string) {
@@ -66,7 +67,7 @@ async function migrateDataToPrisma(data: any[]) {
 
 export default async function CriarMigrar() {
   try {
-    const filePath = "../dados/PRODUTOS.XLS";
+    const filePath = path.join(__dirname, "..", "dados", "PRODUTOS.XLS");
     const data = readXLS(filePath);
 
     await prisma.$connect();
