@@ -11,8 +11,8 @@ datasource db {
 }
 
 model AlumifranPrecos {
-  id      Int     @id @default(autoincrement())
-  procod  String?
+  id     Int      @id @default(autoincrement())
+  procod String?
   prodes String?
-  propcv  String?
+  propcv Decimal? @db.Decimal(10, 2)
 }

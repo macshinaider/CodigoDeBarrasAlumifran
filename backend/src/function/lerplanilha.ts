@@ -10,7 +10,7 @@ function readXLS(filePath: string) {
   const workbook = xlsx.readFile(filePath);
   const sheetName = workbook.SheetNames[0];
   const sheetData = xlsx.utils.sheet_to_json(workbook.Sheets[sheetName]);
-
+  
   return sheetData;
 }
 
@@ -21,13 +21,13 @@ async function migrateDataToPrisma(data: any[]) {
 
     const codigo = row.procod.toString();
 
-    const valor = row.propcv.toString();
+    const valor = row.propcv;
 
-    const ativo = row.proatinat.toString().toUpperCase();
+    const ativo = row.proatinat.toString();
 
-    console.log('ativo: ', ativo)
+    console.log("ativo: ", ativo);
 
-    if (typeof descricao === "string" && ativo === true ) {
+    if (typeof descricao === "string") {
       await prisma.alumifranPrecos.create({
         data: {
           prodes: descricao,
@@ -35,6 +35,7 @@ async function migrateDataToPrisma(data: any[]) {
           propcv: valor,
         },
       });
+
       console.log("Inserindo dados:", row);
     } else {
     }
