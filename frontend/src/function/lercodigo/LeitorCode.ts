@@ -10,7 +10,7 @@ function LeitorCode(onScan: (value: string) => void) {
         target: document.querySelector("#alumifrancode"), // Ou '#yourElement' (opcional)
       },
       decoder: {
-        readers: ["code_128_reader"],
+        readers: ['ean_reader', 'upc_reader'],
       },
     },
     function (err) {
