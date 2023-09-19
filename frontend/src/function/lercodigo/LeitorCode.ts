@@ -1,7 +1,6 @@
 import Quagga from "quagga";
 
-
-function LeitorCode(onScan: (value: string) => void) {  
+function LeitorCode(onScan: (value: string) => void) {
   Quagga.init(
     {
       inputStream: {
@@ -10,7 +9,7 @@ function LeitorCode(onScan: (value: string) => void) {
         target: document.querySelector("#alumifrancode"), // Ou '#yourElement' (opcional)
       },
       decoder: {
-        readers: ['ean_reader', 'upc_reader'],
+        readers: ["ean_reader"],
       },
     },
     function (err) {
@@ -24,7 +23,12 @@ function LeitorCode(onScan: (value: string) => void) {
           const scannedBarcode = data.codeResult.code;
           Quagga.stop();
           onScan(scannedBarcode);
-          
+
+          // Verifica se o elemento HTML existe antes de manipulá-lo
+          const elementoHTML = document.querySelector("#alumifrancode");
+          if (elementoHTML) {
+            elementoHTML.innerHTML += `</div>`;
+          }
         }
       });
       Quagga.start();

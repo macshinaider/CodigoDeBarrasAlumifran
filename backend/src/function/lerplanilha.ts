@@ -66,6 +66,7 @@ async function migrateDataToPrisma(data: any[]) {
 }
 
 export default async function CriarMigrar() {
+  
   try {
     const filePath = path.join(__dirname, "..", "dados", "PRODUTOS.XLS");
     const data = readXLS(filePath);

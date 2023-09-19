@@ -4,7 +4,7 @@ import router from "./routes";
 import fs from "fs";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
-import * as cron from 'node-cron';
+import * as cron from "node-cron";
 import CriarMigrar from "./function/lerplanilha";
 import { filePath, readXLS } from "./function/dadosplanilhas";
 
@@ -18,7 +18,7 @@ class Server {
 
     this.initializeMiddlewares();
     this.initializeRoutes();
-    this.migrateDb();
+    this.scheduleCronJob();
     this.startServer();
   }
 
@@ -32,9 +32,16 @@ class Server {
   initializeRoutes() {
     this.app.use(router);
   }
-  migrateDb() {
-    // CriarMigrar()
-
+  scheduleCronJob() {
+    cron.schedule(
+      "0 10 * * *",
+      () => {
+        CriarMigrar();
+      },
+      {
+        timezone: "America/Sao_Paulo",
+      }
+    );
   }
 
   startServer() {

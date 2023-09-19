@@ -12,23 +12,31 @@ interface IUapi {
 const Home: React.FC = () => {
   const [barcodeValue, setBarcodeValue] = useState<string>("");
   const [produto, setProduto] = useState<IUapi | null>(null);
+  const [Open, setOpen] = useState<boolean>(false);
 
-  // useEffect para monitorar mudanças em barcodeValue
+  function GetFunction(scannedValue: string) {
+    setOpen(true);
+    setBarcodeValue(scannedValue);
+    setOpen(false);
+  }
+
   useEffect(() => {
-    // Verifica se barcodeValue não está vazio e faz a chamada à API
     if (barcodeValue) {
       async function fetchData() {
         const response = await api.post("/consultarpreco", {
           codigodebarras: barcodeValue,
         });
         setProduto(response.data);
-        // Limpa o valor de barcodeValue após a chamada à API
-        setBarcodeValue("");
+
+        setTimeout(() => {
+          setProduto(null);
+          setBarcodeValue("");
+        }, 5000);
       }
 
       fetchData();
     }
-  }, [barcodeValue]);
+  }, [barcodeValue, setOpen, produto]);
 
   return (
     <div>
@@ -45,21 +53,29 @@ const Home: React.FC = () => {
         />
         <button
           className="flex items-center p-2 bg-green-500 rounded-md hover:bg-green-300"
-          onClick={() => LeitorCode((scannedValue: string) => {
-            // Define o valor escaneado em barcodeValue
-            setBarcodeValue(scannedValue);
-          })}
+          onClick={() => LeitorCode(GetFunction)}
         >
           Escanear
         </button>
       </div>
       {produto && (
-        <div className="flex flex-col">
-          <h1>{produto.prodes}</h1>
-          <p>{produto.propcv}</p>
+        <div className="flex flex-col items-center p-4 border border-gray-300 rounded-md shadow-md">
+          <h1 className="text-xl font-semibold mb-2">{produto.prodes}</h1>
+          <p className="text-green-600 font-bold">R$: {produto.propcv}</p>
         </div>
       )}
-      <div className={barcodeValue ? "hidden" : ""} id="alumifrancode"></div>
+      <div>
+        {Open && (
+          <div>
+            <h1>Lendo Codigo de barras</h1>
+          </div>
+        )}
+      </div>
+
+      <div
+        className={barcodeValue ? "hidden" : ""}
+        id="alumifrancode"
+      ></div>
     </div>
   );
 };
