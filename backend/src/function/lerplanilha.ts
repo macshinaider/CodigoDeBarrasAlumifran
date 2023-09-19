@@ -24,6 +24,11 @@ async function migrateDataToPrisma(data: any[]) {
 
     console.log("ativo: ", ativo);
 
+    if (ativo.toLowerCase() === "false") {
+      console.log(`Ignorando linha com ativo 'False':`, row);
+      continue; 
+    }
+
     const existingData = await prisma.alumifranPrecos.findUnique({
       where: {
         procod: codigo,
@@ -56,6 +61,7 @@ async function migrateDataToPrisma(data: any[]) {
 
       console.log("Inserindo dados:", row);
     }
+    // await new Promise((resolve) => setTimeout(resolve, 1000));
   }
 }
 

@@ -1,6 +1,7 @@
 import Quagga from "quagga";
 
-function LeitorCode(onScan: (value: string) => void) {
+
+function LeitorCode(onScan: (value: string) => void) {  
   Quagga.init(
     {
       inputStream: {
@@ -22,7 +23,8 @@ function LeitorCode(onScan: (value: string) => void) {
         if (data && data.codeResult && data.codeResult.code) {
           const scannedBarcode = data.codeResult.code;
           Quagga.stop();
-          onScan(scannedBarcode); // Chama a função de retorno de chamada
+          onScan(scannedBarcode);
+          
         }
       });
       Quagga.start();

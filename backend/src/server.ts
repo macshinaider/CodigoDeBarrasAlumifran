@@ -33,7 +33,7 @@ class Server {
     this.app.use(router);
   }
   migrateDb() {
-    CriarMigrar()
+    // CriarMigrar()
 
   }
 

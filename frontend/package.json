@@ -11,6 +11,8 @@
     "start": "HTTPS=true react-scripts start"
   },
   "dependencies": {
+    "@types/axios": "^0.14.0",
+    "axios": "^1.5.0",
     "mkcert": "^1.5.1",
     "quagga": "^0.12.1",
     "react": "^18.2.0",

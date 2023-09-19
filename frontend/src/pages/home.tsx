@@ -1,9 +1,12 @@
 import { MdOutlineQrCodeScanner } from "react-icons/md";
 import { useState } from "react";
 import LeitorCode from "../function/lercodigo/LeitorCode";
+import Modal from "./modalscanner";
 
 function Home() {
   const [barcodeValue, setBarcodeValue] = useState<string>("");
+  const [modal, setModal] = useState<boolean>(false);
+  
 
   const handleBarcodeScan = (value: string) => {
     setBarcodeValue(value);
@@ -31,14 +34,13 @@ function Home() {
         </button>
       </div>
       <div>
-        {/* Exibir o valor do código de barras escaneado */}
         <p>Valor do Código de Barras: {barcodeValue}</p>
       </div>
-      <div className='w-screen h-screen' id="alumifrancode">
-
-      </div>
+      
+      <Modal />
     </div>
   );
 }
 
 export default Home;
+
