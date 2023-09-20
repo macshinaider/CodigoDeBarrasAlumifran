@@ -67,7 +67,7 @@ const Home: React.FC = () => {
       <div>
         {Open && (
           <div>
-            <h1>Lendo Codigo de barras</h1>
+            <h1>Lendo Codigo de barras!</h1>
           </div>
         )}
       </div>
