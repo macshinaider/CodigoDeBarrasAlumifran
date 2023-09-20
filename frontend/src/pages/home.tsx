@@ -71,11 +71,7 @@ const Home: React.FC = () => {
           </div>
         )}
       </div>
-
-      <div
-        className={barcodeValue ? "hidden" : ""}
-        id="alumifrancode"
-      ></div>
+      <div id="leitorcodigodebarras"></div>
     </div>
   );
 };

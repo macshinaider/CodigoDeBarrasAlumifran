@@ -1,7 +1,12 @@
 import axios from "axios";
 
+
+
+const apiUrl = import.meta.env.VITE_REACT_APP_URL || "http://localhost:3001";
+console.log("🚀 ~ file: api.ts:6 ~ apiUrl:", apiUrl)
+
 export const api = axios.create({
-  baseURL: "https://urban-acorn-r46x94q5x9pfq6r-3001.app.github.dev/",
+  baseURL: apiUrl,
   headers: {
     "Content-Type": "application/json",
   },

@@ -6,7 +6,7 @@ function LeitorCode(onScan: (value: string) => void) {
       inputStream: {
         name: "Live",
         type: "LiveStream",
-        target: document.querySelector("#alumifrancode"), // Ou '#yourElement' (opcional)
+        target: document.querySelector("#leitorcodigodebarras"), // Ou '#yourElement' (opcional)
       },
       decoder: {
         readers: ["ean_reader"],
