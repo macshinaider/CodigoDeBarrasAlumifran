@@ -17,20 +17,20 @@ services:
     ports:
       - 3002:80
 
-  postgres:
-    image: postgres:latest
-    container_name: bancodedados
-    environment:
-      POSTGRES_DB: codigodebarras
-      POSTGRES_USER: luuhsantanafs
-      POSTGRES_PASSWORD: Lucas102030
-    ports:
-      - "5432:5432"
-    volumes:
-      - ./bancodedados:/var/lib/postgresql/data
-    networks:
-      - redebancodedados
+#   postgres:
+#     image: postgres:latest
+#     container_name: bancodedados
+#     environment:
+#       POSTGRES_DB: codigodebarras
+#       POSTGRES_USER: luuhsantanafs
+#       POSTGRES_PASSWORD: Lucas102030
+#     ports:
+#       - "5432:5432"
+#     volumes:
+#       - ./bancodedados:/var/lib/postgresql/data
+#     networks:
+#       - redebancodedados
 
-networks:
-  redebancodedados:
-    driver: bridge
+# networks:
+#   redebancodedados:
+#     driver: bridge

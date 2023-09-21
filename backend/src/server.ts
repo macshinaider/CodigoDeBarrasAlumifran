@@ -6,7 +6,6 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import * as cron from "node-cron";
 import CriarMigrar from "./function/lerplanilha";
-import { filePath, readXLS } from "./function/dadosplanilhas";
 
 class Server {
   app: any;

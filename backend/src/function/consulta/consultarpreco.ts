@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 
 const ConsultarPreco = async (req: express.Request, res: express.Response) => {
   const dados = req.body;
+  console.log("🚀 ~ file: consultarpreco.ts:8 ~ ConsultarPreco ~ dados:", dados)
   if (!dados) {
     return res.status(400).json({
       mensagem: "Dados não informados",
