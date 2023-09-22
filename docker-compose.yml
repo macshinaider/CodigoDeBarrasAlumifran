@@ -6,7 +6,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - 81:3001
+      - 90:3001
     depends_on:
       - db
 
