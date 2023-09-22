@@ -6,9 +6,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - 3001:3001
-    depends_on:
-      - db
+      - 3001:3001    
 
   frontend:
     build:
