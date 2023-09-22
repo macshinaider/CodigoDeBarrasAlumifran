@@ -1,21 +1,24 @@
 version: "3.8"
 
 services:
-  # backend:
-  #   build:
-  #     context: ./backend
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - 3001:3001
-  #   # depends_on:
-  #   #   - postgres
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 3001:3001
+    depends_on:
+      - postgres
 
-  # frontend:
-  #   build:
-  #     context: ./frontend
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - 3002:80
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 3002:80
+    depends_on:
+      - backend
+
 
   postgres:
     image: postgres:latest

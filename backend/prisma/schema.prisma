@@ -27,9 +27,9 @@ model AlumifranPrecos {
   procodipi  String?
   procest    String?
   proqmi     Float?
-  propdc     Float?
-  propdv     Float?
-  propcv     Float?
+  propdc     Decimal?  @db.Decimal(10, 2)
+  propdv     Decimal?  @db.Decimal(10, 2)
+  propcv     Decimal?  @db.Decimal(10, 2)
   proicm     Float?
   proipi     Float?
   comissao   Float?
