@@ -1,4 +1,4 @@
-import { connect, Connection, Channel } from 'amqplib';
+import { connect, Connection, Channel } from "amqplib";
 import { rabbitMQConfig } from "./config";
 
 async function sendJsonToRabbitMQ(jsonData: any) {
@@ -14,6 +14,7 @@ async function sendJsonToRabbitMQ(jsonData: any) {
 
     // Envie cada linha como uma mensagem separada para a fila
     for (const row of jsonData) {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       channel.sendToQueue(
         rabbitMQConfig.fila,
         Buffer.from(JSON.stringify(row))
