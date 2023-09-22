@@ -4,8 +4,8 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 const ConsultarPreco = async (req: express.Request, res: express.Response) => {
-  const codigodebarras = req.params.codigodebarras;
   try {
+    const codigodebarras = req.params.codigodebarras;
     if(!codigodebarras) {
       return res.status(400).json({
         message: "O código de barras é obrigatório",
@@ -26,12 +26,12 @@ const ConsultarPreco = async (req: express.Request, res: express.Response) => {
   } catch (error) {
     console.log(error);
     return res.status(500).send({
-      message: error.message,
+      message: JSON.stringify(error.message),
     });
     
   }
 
-  res.status(200).send(codigodebarras)
+  
 };
 
 export default ConsultarPreco;
