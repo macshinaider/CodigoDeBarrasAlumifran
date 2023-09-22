@@ -5,7 +5,8 @@ import fs from "fs";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import * as cron from "node-cron";
-import CriarMigrar from "./function/lerplanilha";
+import { consumeFromRabbitMQ } from "./function/rabbitmq/consumerFila";
+
 
 class Server {
   app: any;
@@ -17,8 +18,8 @@ class Server {
 
     this.initializeMiddlewares();
     this.initializeRoutes();
-    this.scheduleCronJob();
     this.startServer();
+    this.lerfila();
   }
 
   initializeMiddlewares() {
@@ -31,23 +32,16 @@ class Server {
   initializeRoutes() {
     this.app.use(router);
   }
-  scheduleCronJob() {
-    cron.schedule(
-      "0 10 * * *",
-      () => {
-        CriarMigrar();
-      },
-      {
-        timezone: "America/Sao_Paulo",
-      }
-    );
-  }
 
   startServer() {
     this.app.listen(this.port, () => {
       console.log("Servidor rodando na porta:" + this.port);
     });
   }
+  lerfila() {
+    consumeFromRabbitMQ();
+  }
 }
 
 const server = new Server();
+

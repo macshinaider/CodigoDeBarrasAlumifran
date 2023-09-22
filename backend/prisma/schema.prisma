@@ -11,8 +11,50 @@ datasource db {
 }
 
 model AlumifranPrecos {
-  id     Int      @id @default(autoincrement())
-  procod String?  @unique
-  prodes String?
-  propcv Decimal? @db.Decimal(10, 2)
+  id         Int      @id @default(autoincrement())
+  procod     String   @unique
+  prodes     String
+  promar     String?
+  prouni     String?
+  proatinat  Boolean?
+  procp1     String?
+  procp2     String?
+  proref     String?
+  prosit     String?
+  procp3     String?
+  procp4     String?
+  propeso    Float?
+  procodipi  String?
+  procest    String?
+  proqmi     Float?
+  propdc     Float?
+  propdv     Float?
+  propcv     Float?
+  proicm     Float?
+  proipi     Float?
+  comissao   Float?
+  profin     Float?
+  profre     Float?
+  proipf     Float?
+  proipe     Float?
+  procfv     Float?
+  procop     Float?
+  procus     Float?
+  prorent    Float?
+  procapt    Float?
+  prodesc    Float?
+  proipecus  Float?
+  prodifimp  Float?
+  proemb     Float?
+  prodescon  Float?
+  prolotvd   Float?
+  proorig    String?
+  procsosn   String?
+  prostipi   String?
+  propis     String?
+  procofins  String?
+  proadc     Float?
+  clf_des    String?
+  clf_ncm    String?
+
 }

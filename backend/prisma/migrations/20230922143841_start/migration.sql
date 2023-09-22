@@ -7,3 +7,6 @@ CREATE TABLE "AlumifranPrecos" (
 
     CONSTRAINT "AlumifranPrecos_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "AlumifranPrecos_procod_key" ON "AlumifranPrecos"("procod");

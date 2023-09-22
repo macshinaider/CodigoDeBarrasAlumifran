@@ -2,6 +2,8 @@ import { PrismaClient } from "@prisma/client";
 import * as xlsx from "xlsx";
 import * as path from "path";
 import { IUdb } from "./types";
+import { readXLSApi } from "./update/lerxlx";
+import sendJsonToRabbitMQ from "./rabbitmq/rabbitmq";
 
 const prisma = new PrismaClient();
 
@@ -15,7 +17,7 @@ function readXLS(filePath: string) {
 }
 
 // Função para migrar os dados para o banco de dados usando o Prisma
-async function migrateDataToPrisma(data: any[]) {
+export async function migrateDataToPrisma(data: any[]) {
   for (const row of data) {
     const descricao = row.prodes.toString();
     const codigo = row.procod.toString();
@@ -34,6 +36,7 @@ async function migrateDataToPrisma(data: any[]) {
         procod: codigo,
       },
     });
+    console.log("🚀 ~ file: lerplanilha.ts:37 ~ migrateDataToPrisma ~ existingData:", existingData)
 
     if (existingData) {
       // Atualizar os dados caso já existam
@@ -51,17 +54,17 @@ async function migrateDataToPrisma(data: any[]) {
       }
     } else {
       // Cadastrar os novos dados
-      await prisma.alumifranPrecos.create({
-        data: {
-          prodes: descricao,
-          procod: codigo,
-          propcv: valor,
-        },
-      });
+      // await prisma.alumifranPrecos.create({
+      //   data: {
+      //     prodes: descricao,
+      //     procod: codigo,
+      //     propcv: valor,
+      //   },
+      // });
 
       console.log("Inserindo dados:", row);
     }
-    // await new Promise((resolve) => setTimeout(resolve, 1000));
+    
   }
 }
 
@@ -78,5 +81,19 @@ export default async function CriarMigrar() {
     await prisma.$disconnect();
   } catch (error) {
     console.error("Ocorreu um erro:", error);
+  }
+}
+
+export async function RabbitMQEvent() {
+
+  try {
+    const filePath = path.join(__dirname, "..", "dados", "PRODUTOS.XLS");
+    const data = readXLSApi(filePath);
+
+    sendJsonToRabbitMQ(data)
+    
+  } catch (error) {
+    console.error("Ocorreu um erro:", error);
+    
   }
 }

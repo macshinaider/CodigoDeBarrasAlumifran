@@ -12,31 +12,56 @@ interface IUapi {
 const Home: React.FC = () => {
   const [barcodeValue, setBarcodeValue] = useState<string>("");
   const [produto, setProduto] = useState<IUapi | null>(null);
-  const [Open, setOpen] = useState<boolean>(false);
+  const [errorStatus, setErrorStatus] = useState<string>("");
+  const [open, setOpen] = useState<boolean>(true);
 
-  function GetFunction(scannedValue: string) {
-    setOpen(true);
-    setBarcodeValue(scannedValue);
-    setOpen(false);
+  async function GetFunction(scannedValue: string) {
+    try {           
+      setOpen(true)
+      setBarcodeValue(scannedValue);
+      
+      
+
+      const consultar = await ConsultarBack(scannedValue);
+      if (consultar) {
+        setProduto(consultar);
+        setOpen(false);
+      } else {
+        setErrorStatus("Produto não encontrado.");
+      }
+    } catch (error) {
+      setErrorStatus("Erro ao consultar o produto.");
+    }
   }
 
   useEffect(() => {
-    if (barcodeValue) {
-      async function fetchData() {
-        const response = await api.post("/consultarpreco", {
-          codigodebarras: barcodeValue,
-        });
-        setProduto(response.data);
+    // Limpar o estado do produto após 5 segundos
+    const timeoutId = setTimeout(() => {
+      setProduto(null);
+      setBarcodeValue("");
+      setErrorStatus("");
+    }, 5000);
 
-        setTimeout(() => {
-          setProduto(null);
-          setBarcodeValue("");
-        }, 5000);
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [produto, open]);
+
+  async function ConsultarBack(valor: string) {
+    try {
+      const response = await api.post("/consultarpreco", {
+        codigodebarras: valor,
+      });
+
+      if (response.status === 200) {
+        return response.data;
+      } else {
+        return null;
       }
-
-      fetchData();
+    } catch (error) {
+      throw error;
     }
-  }, [barcodeValue, setOpen, produto]);
+  }
 
   return (
     <div>
@@ -64,14 +89,8 @@ const Home: React.FC = () => {
           <p className="text-green-600 font-bold">R$: {produto.propcv}</p>
         </div>
       )}
-      <div>
-        {Open && (
-          <div>
-            <h1>Lendo Codigo de barras</h1>
-          </div>
-        )}
-      </div>
-      <div id="leitorcodigodebarras"></div>
+      {errorStatus && <div className="text-red-500">{errorStatus}</div>}
+      <div className={open ? "" : "hidden"} id="leitorcodigodebarras"></div>
     </div>
   );
 };
