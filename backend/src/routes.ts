@@ -11,7 +11,7 @@ import bodyParser from 'body-parser';
 
 const router = express.Router();
 
-router.post("/consultarpreco", ConsultarPreco);
+router.post("/consultarpreco/:codigodebarras", ConsultarPreco);
 router.post("/update", upload.single("xlsFile"), uploadFile);
 
 export default router;

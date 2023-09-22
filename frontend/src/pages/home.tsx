@@ -49,9 +49,7 @@ const Home: React.FC = () => {
 
   async function ConsultarBack(valor: string) {
     try {
-      const response = await api.post("/consultarpreco", {
-        codigodebarras: valor,
-      });
+      const response = await api.post(`/consultarpreco/${valor}`, );
 
       if (response.status === 200) {
         return response.data;
