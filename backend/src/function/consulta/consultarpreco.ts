@@ -6,6 +6,7 @@ const prisma = new PrismaClient();
 const ConsultarPreco = async (req: express.Request, res: express.Response) => {
   try {
     const codigodebarras = req.params.codigodebarras;
+    console.log("🚀 ~ file: consultarpreco.ts:9 ~ ConsultarPreco ~ codigodebarras:", codigodebarras)
     if (!codigodebarras) {
       return res.status(400).json({
         message: "O código de barras é obrigatório",
