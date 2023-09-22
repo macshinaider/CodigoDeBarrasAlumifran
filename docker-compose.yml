@@ -17,5 +17,14 @@ services:
     ports:
       - 3002:80
 
-
-  
+  postgres:
+    image: postgres:latest
+    container_name: meu-postgres
+    environment:
+      POSTGRES_DB: codigodebarras
+      POSTGRES_USER: luuhsantanafs
+      POSTGRES_PASSWORD: euamoJesus102030
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./dados_postgres:/var/lib/postgresql/data
