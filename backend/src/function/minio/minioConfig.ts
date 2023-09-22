@@ -1,4 +1,3 @@
-// src/config/minioConfig.ts
 import * as Minio from 'minio'
 
 export const minioClient = new Minio.Client({
