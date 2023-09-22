@@ -31,7 +31,7 @@ RUN if [ ! -f "prisma/last_checksum" ] || [ "$(cat prisma/last_checksum)" != "$c
 # Generate Prisma client
 RUN yarn prisma generate
 
-RUN npx tsc
+
 
 # Define a command to run your application
-CMD ["npm", "start"]
+CMD ["yarn", "dev"]
