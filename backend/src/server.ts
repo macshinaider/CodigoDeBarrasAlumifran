@@ -7,7 +7,6 @@ import bodyParser from "body-parser";
 import * as cron from "node-cron";
 import { consumeFromRabbitMQ } from "./function/rabbitmq/consumerFila";
 
-
 class Server {
   app: any;
   port: string | number;
@@ -44,4 +43,3 @@ class Server {
 }
 
 const server = new Server();
-

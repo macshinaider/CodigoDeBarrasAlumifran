@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 const ConsultarPreco = async (req: express.Request, res: express.Response) => {
   try {
     const codigodebarras = req.params.codigodebarras;
-    if(!codigodebarras) {
+    if (!codigodebarras) {
       return res.status(400).json({
         message: "O código de barras é obrigatório",
       });
@@ -16,22 +16,18 @@ const ConsultarPreco = async (req: express.Request, res: express.Response) => {
         procod: codigodebarras,
       },
     });
-    if(!consultar) {
+    if (!consultar) {
       return res.status(400).json({
         message: "Código de barras não encontrado",
       });
     }
     return res.status(200).json(consultar);
-    
   } catch (error) {
     console.log(error);
     return res.status(500).send({
       message: JSON.stringify(error.message),
     });
-    
   }
-
-  
 };
 
 export default ConsultarPreco;
