@@ -2,21 +2,19 @@ version: "3.7"
 
 services:
   backend:
+    restart: always
     build:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - 3001:3001    
+      - 3001:3001
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    restart: always
     ports:
       - 3002:80
     depends_on:
       - backend
- 
- 
-
-  
