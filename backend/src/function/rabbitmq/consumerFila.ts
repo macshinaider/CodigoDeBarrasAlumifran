@@ -64,7 +64,7 @@ export async function consumeFromRabbitMQ() {
     await channel.assertQueue(rabbitMQConfig.fila);
 
     console.log(`Aguardando mensagens na fila ${rabbitMQConfig.fila}`);
-
+    channel.prefetch(10);
     // Configurar a função de callback para processar as mensagens recebidas
     channel.consume(
       rabbitMQConfig.fila,
@@ -78,9 +78,6 @@ export async function consumeFromRabbitMQ() {
             },
           });
           console.log("🚀 produto ja existe!:", existingData);
-          setTimeout(() => {
-            // Continue consumindo a próxima mensagem
-          }, 1000);
 
           if (existingData) {
             if (
@@ -96,10 +93,10 @@ export async function consumeFromRabbitMQ() {
                   propcv: jsonData.propcv,
                 },
               });
-              setTimeout(() => {
-                // Continue consumindo a próxima mensagem
-              }, 1000);
+
               console.log("🚀 Produto Atualizado :", update);
+              channel.ack(message);
+            } else {
               channel.ack(message);
             }
           } else {
@@ -154,8 +151,6 @@ export async function consumeFromRabbitMQ() {
             });
             console.log("🚀 Produto Cadastrado:", cadastrado);
             channel.ack(message);
-
-            await new Promise((resolve) => setTimeout(resolve, 2000));
           }
         }
       }
