@@ -157,7 +157,7 @@ export async function consumeFromRabbitMQ() {
 
             setTimeout(() => {
               // Continue consumindo a próxima mensagem
-            }, 1000);
+            }, 10000);
           }
         }
       }

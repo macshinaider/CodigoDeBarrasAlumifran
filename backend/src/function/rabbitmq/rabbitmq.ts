@@ -14,7 +14,7 @@ async function sendJsonToRabbitMQ(jsonData: any) {
 
     // Envie cada linha como uma mensagem separada para a fila
     for (const row of jsonData) {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 50));
       channel.sendToQueue(
         rabbitMQConfig.fila,
         Buffer.from(JSON.stringify(row))
