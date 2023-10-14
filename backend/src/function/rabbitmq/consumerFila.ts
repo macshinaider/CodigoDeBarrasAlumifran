@@ -155,9 +155,7 @@ export async function consumeFromRabbitMQ() {
             console.log("🚀 Produto Cadastrado:", cadastrado);
             channel.ack(message);
 
-            setTimeout(() => {
-              // Continue consumindo a próxima mensagem
-            }, 10000);
+            await new Promise((resolve) => setTimeout(resolve, 2000));
           }
         }
       }
