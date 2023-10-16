@@ -7,6 +7,7 @@ interface IUapi {
   procod: string;
   prodes: string;
   propcv: string;
+  propdv: string
 }
 
 const Home: React.FC = () => {
@@ -87,7 +88,7 @@ const Home: React.FC = () => {
       {produto && (
         <div className="flex flex-col items-center p-4 border border-gray-300 rounded-md shadow-md">
           <h1 className="text-xl font-semibold mb-2">{produto.prodes}</h1>
-          <p className="text-green-600 font-bold text-8xl">R$: {produto.propcv}</p>
+          <p className="text-green-600 font-bold text-8xl">R$: {produto.propdv}</p>
         </div>
       )}
       {errorStatus && <div className="text-red-500">{errorStatus}</div>}
