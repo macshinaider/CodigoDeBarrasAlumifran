@@ -64,14 +64,19 @@ const Home: React.FC = () => {
       <h1 className="flex justify-center h-[5rem] bg-red-600 text-[300%] rounded-lg">
         Alumifran
       </h1>
-      <div className="flex p-4 w-screen">
+      <div className="flex p-4 w-screen gap-2">
         <input
           className="w-full rounded-md mr-2"
           type="text"
           placeholder="Digite aqui Código de Barras"
           value={barcodeValue}
           onChange={(e) => setBarcodeValue(e.target.value)}
+          autoFocus
+          
         />
+        <div className="flex p-2 bg-red-500 rounded-md hover:bg-red-400">
+          <button onClick={() => GetFunction(barcodeValue)}>Consultar</button>
+        </div>
         <button
           className="flex items-center p-2 bg-green-500 rounded-md hover:bg-green-300"
           onClick={() => LeitorCode(GetFunction)}
@@ -82,7 +87,7 @@ const Home: React.FC = () => {
       {produto && (
         <div className="flex flex-col items-center p-4 border border-gray-300 rounded-md shadow-md">
           <h1 className="text-xl font-semibold mb-2">{produto.prodes}</h1>
-          <p className="text-green-600 font-bold">R$: {produto.propcv}</p>
+          <p className="text-green-600 font-bold text-8xl">R$: {produto.propcv}</p>
         </div>
       )}
       {errorStatus && <div className="text-red-500">{errorStatus}</div>}
