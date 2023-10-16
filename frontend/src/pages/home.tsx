@@ -7,7 +7,7 @@ interface IUapi {
   procod: string;
   prodes: string;
   propcv: string;
-  propdv: string
+  propdv: string;
 }
 
 const Home: React.FC = () => {
@@ -33,8 +33,13 @@ const Home: React.FC = () => {
     }
   }
 
+  async function handleEnterKeyPress(event: React.KeyboardEvent) {
+    if (event.key === "Enter") {
+      GetFunction(barcodeValue);
+    }
+  }
+
   useEffect(() => {
-    // Limpar o estado do produto após 5 segundos
     const timeoutId = setTimeout(() => {
       setProduto(null);
       setBarcodeValue("");
@@ -72,8 +77,8 @@ const Home: React.FC = () => {
           placeholder="Digite aqui Código de Barras"
           value={barcodeValue}
           onChange={(e) => setBarcodeValue(e.target.value)}
+          onKeyPress={handleEnterKeyPress}
           autoFocus
-          
         />
         <div className="flex p-2 bg-red-500 rounded-md hover:bg-red-400">
           <button onClick={() => GetFunction(barcodeValue)}>Consultar</button>
@@ -88,7 +93,9 @@ const Home: React.FC = () => {
       {produto && (
         <div className="flex flex-col items-center p-4 border border-gray-300 rounded-md shadow-md">
           <h1 className="text-xl font-semibold mb-2">{produto.prodes}</h1>
-          <p className="text-green-600 font-bold text-8xl">R$: {produto.propdv}</p>
+          <p className="text-green-600 font-bold text-8xl">
+            R$: {produto.propdv.replace(".", ",")}
+          </p>
         </div>
       )}
       {errorStatus && <div className="text-red-500">{errorStatus}</div>}
