@@ -16,11 +16,9 @@ const Home: React.FC = () => {
   const [open, setOpen] = useState<boolean>(true);
 
   async function GetFunction(scannedValue: string) {
-    try {           
-      setOpen(true)
+    try {
+      setOpen(true);
       setBarcodeValue(scannedValue);
-      
-      
 
       const consultar = await ConsultarBack(scannedValue);
       if (consultar) {
@@ -49,7 +47,7 @@ const Home: React.FC = () => {
 
   async function ConsultarBack(valor: string) {
     try {
-      const response = await api.post(`/consultarpreco/${valor}`, );
+      const response = await api.post(`/consultarpreco/${valor}`);
 
       if (response.status === 200) {
         return response.data;
