@@ -12,7 +12,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - 3001:3001
+      - 123:3001
 
   frontend:
     build:
@@ -20,6 +20,6 @@ services:
       dockerfile: Dockerfile
     restart: always
     ports:
-      - 3002:80
+      - 321:80
     depends_on:
       - backend
