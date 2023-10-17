@@ -9,7 +9,7 @@ function LeitorCode(onScan: (value: string) => void) {
         target: document.querySelector("#leitorcodigodebarras"), // Ou '#yourElement' (opcional)
       },
       decoder: {
-        readers: ["ean_reader"],
+        readers: ["ean_reader, ean_13"],
       },
     },
     function (err) {
