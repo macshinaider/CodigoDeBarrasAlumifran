@@ -11,6 +11,10 @@ import bodyParser from 'body-parser';
 
 const router = express.Router();
 
+router.get("/", (req, res) => {
+    res.send("Tudo está funcionando corretamente!");
+  });
+
 router.post("/consultarpreco/:codigodebarras", ConsultarPreco);
 router.post("/update", upload.single("xlsFile"), uploadFile);
 
