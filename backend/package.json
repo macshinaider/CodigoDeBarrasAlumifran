@@ -36,7 +36,8 @@
   },
   "scripts": {
     "dev": "nodemon",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "build": "tsc"
   },
   "devDependencies": {
     "@types/node": "^20.5.6",
