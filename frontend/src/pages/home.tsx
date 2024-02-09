@@ -80,11 +80,11 @@ const Home: React.FC = () => {
           onKeyPress={handleEnterKeyPress}
           autoFocus
         />
-        <div className="flex p-2 bg-red-500 rounded-md hover:bg-red-400 hover:text-white">
+        <div className="flex p-2 text-white bg-red-500 rounded-md hover:bg-red-400 hover:text-white">
           <button onClick={() => GetFunction(barcodeValue)}>Consultar</button>
         </div>
         <button
-          className="flex items-center p-2 bg-green-500 rounded-md hover:bg-green-300 hover:text-white"
+          className="items-center p-2 hidden bg-green-500 rounded-md hover:bg-green-300 hover:text-white"
           onClick={() => LeitorCode(GetFunction)}
         >
           Escanear
