@@ -64,7 +64,7 @@ export async function consumeFromRabbitMQ() {
     await channel.assertQueue(rabbitMQConfig.fila);
 
     console.log(`Aguardando mensagens na fila ${rabbitMQConfig.fila}`);
-    channel.prefetch(500);
+    channel.prefetch(1);
     // Configurar a função de callback para processar as mensagens recebidas
     channel.consume(
       rabbitMQConfig.fila,

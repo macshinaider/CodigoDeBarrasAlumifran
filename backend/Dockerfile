@@ -22,7 +22,9 @@ RUN current_checksum=$(md5sum prisma/schema.prisma | awk '{print $1}')
 # Run Prisma migrations if the schema.prisma checksum has changed
 RUN if [ ! -f "prisma/last_checksum" ] || [ "$(cat prisma/last_checksum)" != "$current_checksum" ]; then \
       echo "Running Prisma migrations..."; \
-      npx prisma migrate dev; \
+      if [ ! -d "prisma/migrations" ]; then \
+        npx prisma migrate dev --name init; \
+      fi; \
       echo "$current_checksum" > prisma/last_checksum; \
     else \
       echo "Schema.prisma is already up to date."; \
@@ -30,8 +32,6 @@ RUN if [ ! -f "prisma/last_checksum" ] || [ "$(cat prisma/last_checksum)" != "$c
 
 # Generate Prisma client
 RUN yarn prisma generate
-
-
 
 # Define a command to run your application
 CMD ["yarn", "dev"]
